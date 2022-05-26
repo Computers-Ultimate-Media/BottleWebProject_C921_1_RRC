@@ -37,8 +37,8 @@ def create_database():
 
     # скрипт создания таблицы с результатами
     tables = {
-        "CREATE TABLE `bottle_db`.`result` ("
-        "`id` INT NOT NULL,  "
+        "CREATE TABLE `bottle_db`.`requests` ("
+        "`id` INT NOT NULL AUTO_INCREMENT,  "
         "`timestamp` DATETIME NOT NULL DEFAULT NOW(),"
         "`alg_type` INT NOT NULL,"
         "`input` TEXT NOT NULL,"
@@ -81,5 +81,5 @@ def insert(sql_: str, val_: any):
     try:
         my_cursor.execute(sql_, val_)
         db.commit()
-    except mysql.connector.Error:
-        pass
+    except mysql.connector.Error as error:
+        print(error)
