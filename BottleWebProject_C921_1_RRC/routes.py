@@ -1,4 +1,4 @@
-from bottle import route, view
+from bottle import route, view, redirect, request, post
 from datetime import datetime
 from modules import bfs, dfs, kruskal
 
@@ -20,6 +20,21 @@ def contact():
         title='Команда #1',
         year=datetime.now().year
     )
+
+
+@route('/check_result', method='post')
+def check_result():
+    from json import dumps as json_dumps, loads as json_loads
+
+    data = request.body.getvalue().decode('utf-8')
+    data = json_loads(data)
+
+
+@post('/bfs', method='post')
+@post('/dfs', method='post')
+@post('/kruskal', method='post')
+def result():
+    return redirect('/result')
 
 
 @route('/bfs')

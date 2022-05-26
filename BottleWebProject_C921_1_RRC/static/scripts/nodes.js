@@ -1,44 +1,42 @@
-var nodes = null;
-var edges = null;
-var network = null;
-var data = getScaleFreeNetwork(25);
-var seed = 2;
+let nodes = null;
+let edges = null;
+let network = null;
+let data = null;
+let seed = 2;
+let counter_nodes = 0;
 
 function draw() {
     nodes = [];
     edges = [];
-
-    // create a network
-    var container = document.getElementById("mynetwork");
-    var options = {
-        layout: {randomSeed: seed}, // just to make sure the layout is the same when the locale is changed
+    let container = document.getElementById("mynetwork");
+    let options = {
+        layout: {randomSeed: seed},
         locale: "ru",
         manipulation: {
             addNode: function (data, callback) {
                 // filling in the popup DOM elements
-                document.getElementById("node-operation").innerText = "Add Node";
+                document.getElementById("node-operation").innerText = "Добавьте узел";
                 editNode(data, clearNodePopUp, callback);
             },
             editNode: function (data, callback) {
                 // filling in the popup DOM elements
-                document.getElementById("node-operation").innerText = "Edit Node";
+                document.getElementById("node-operation").innerText = "Изменить узел";
                 editNode(data, cancelNodeEdit, callback);
             },
             addEdge: function (data, callback) {
                 if (data.from === data.to) {
-                    var r = confirm("Do you want to connect the node to itself?");
+                    let r = confirm("Вы действительно хотите соединить узел с самим собой?");
                     if (r !== true) {
                         callback(null);
                         return;
                     }
                 }
-                document.getElementById("edge-operation").innerText = "Add Edge";
+                document.getElementById("edge-operation").innerText = "Добавить связь";
                 editEdgeWithoutDrag(data, callback);
             },
             editEdge: {
                 editWithoutDrag: function (data, callback) {
-                    document.getElementById("edge-operation").innerText =
-                        "Edit Edge";
+                    document.getElementById("edge-operation").innerText = "Изменить связь";
                     editEdgeWithoutDrag(data, callback);
                 },
             },
@@ -47,8 +45,9 @@ function draw() {
     network = new vis.Network(container, data, options);
 }
 
+
 function editNode(data, cancelAction, callback) {
-    document.getElementById("node-label").value = data.label;
+    document.getElementById("node-id").value = counter_nodes;
     document.getElementById("node-saveButton").onclick = saveNodeData.bind(
         this,
         data,
@@ -71,8 +70,29 @@ function cancelNodeEdit(callback) {
     callback(null);
 }
 
+function removeOptions() {
+    const select = document.getElementById("first_node");
+    let opt_len = select.options.length - 1;
+    for (let i = opt_len; i >= 0; i--) {
+        select.remove(i);
+    }
+}
+
+function addNewNodeInList() {
+    const select = document.getElementById("first_node");
+    removeOptions();
+
+    for (let index in nodes) {
+        select.options[select.options.length] = new Option(nodes[index], index);
+    }
+}
+
 function saveNodeData(data, callback) {
-    data.label = document.getElementById("node-label").value;
+    nodes.push(counter_nodes);
+    counter_nodes += 1;
+    addNewNodeInList();
+
+    data.label = document.getElementById("node-id").value;
     clearNodePopUp();
     callback(data);
 }
@@ -107,6 +127,26 @@ function saveEdgeData(data, callback) {
     data.label = document.getElementById("edge-label").value;
     clearEdgePopUp();
     callback(data);
+}
+
+function addConnections(elem, index) {
+    elem.connections = network.getConnectedNodes(index);
+}
+
+function exportNetwork() {
+    let nodes = objectToArray(network.getPositions());
+    nodes.forEach(addConnections);
+
+    let request = new XMLHttpRequest();
+    request.open("POST", "check_result", false);
+    request.send(JSON.stringify(nodes, undefined, 2));
+}
+
+function objectToArray(obj) {
+    return Object.keys(obj).map(function (key) {
+        obj[key].id = key;
+        return obj[key];
+    });
 }
 
 function init() {
