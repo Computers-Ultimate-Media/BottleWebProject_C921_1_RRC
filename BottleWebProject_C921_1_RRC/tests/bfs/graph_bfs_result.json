@@ -1,0 +1,35 @@
+[
+  {
+    "id": "0",
+    "connections": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "1",
+    "connections": [
+      2,
+      4
+    ]
+  },
+  {
+    "id": "2",
+    "connections": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": "3",
+    "connections": [
+      0
+    ]
+  },
+  {
+    "id": "4",
+    "connections": [
+      1
+    ]
+  }
+]
