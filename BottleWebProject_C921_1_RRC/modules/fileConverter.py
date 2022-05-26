@@ -6,7 +6,7 @@ def json_to_matrix(data: str) -> list[list]:
     nodes: list = json.loads(data)
     sorted(nodes, key=lambda x: x['id'])
     node_num: int = len(nodes)
-    matrix = np.zeros(node_num * node_num, dtype=np.int32).reshape(node_num, node_num)
+    matrix : np.ndarray = np.zeros(node_num * node_num, dtype=np.int32).reshape(node_num, node_num)
     for node in nodes:
         id = int(node['id'])
         connections: list = node['connections']
@@ -14,21 +14,27 @@ def json_to_matrix(data: str) -> list[list]:
             target: int = int(connection)
             matrix[id][target] = 1
 
-    matrix.toList()
+    matrix.tolist()
     return matrix
 
-def matrix_to_json(matrix : list[list]) -> str :
+
+def matrix_to_json(matrix: list[list]) -> str:
     data = list()
-    for idx, node in enumerate(matrix):
+    for idnode, node in enumerate(matrix):
         conns = list()
 
-        for idx, value in enumerate(node):
-            if(value>0):
-                conns.append(idx)
+        for idval, value in enumerate(node):
+            if (value > 0):
+                conns.append(idval)
 
         data.append(dict(
-            id=idx,
-            connections = conns
-        ) )
+            id=str(idnode),
+            connections=conns
+        ))
 
-    return json.dumps(data)
+    return json.dumps(data, indent=2)
+
+
+
+
+
