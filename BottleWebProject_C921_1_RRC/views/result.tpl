@@ -1,6 +1,6 @@
 % rebase('layout.tpl', title=title, year=year)
 
-<title> {{ title }}}</title>
+<title> {{ title }}</title>
 
 <style>
     body,
@@ -20,5 +20,5 @@
 <script type="text/javascript" src="../static/scripts/nodes.js"></script>
 
 <body onload="importNetwork();">
-    <div id="mynetwork"></div>
+    <div id="mynetwork" data-graph="{{graph}}"></div>
 </body>

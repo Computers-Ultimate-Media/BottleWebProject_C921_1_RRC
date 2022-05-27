@@ -153,6 +153,7 @@ function exportNetwork() {
     let request = new XMLHttpRequest();
     request.open("POST", "calculate", false);
     request.send(JSON.stringify(calculate_request));
+    window.location.replace("http://localhost:5555/result?id=");
 }
 
 function objectToArray(obj) {
@@ -164,14 +165,14 @@ function objectToArray(obj) {
 
 
 function importNetwork() {
-    let l = document.getElementById("mynetwork");
-    let graph = l.dataset.graph
+    let container = document.getElementById("mynetwork");
+    let graph = container.dataset.graph
 
     let inputData = JSON.parse(graph);
 
     let data = {
         nodes: getNodeData(inputData),
-        edges: getEdgeData(inputData),
+        edges: getEdgeData(inputData)
     };
 
     network = new vis.Network(container, data, {});
@@ -192,7 +193,7 @@ function getNodeData(data) {
 
 function getNodeById(data, id) {
     for (let n = 0; n < data.length; n++) {
-        if (data[n].id === id) {
+        if (data[n].id == id) {
             // double equals since id can be numeric or string
             return data[n];
         }
@@ -215,10 +216,10 @@ function getEdgeData(data) {
             let duplicateIndex = elementConnections.findIndex(function (
                 connection
             ) {
-                return connection === node.id; // double equals since id can be numeric or string
+                return connection == node.id; // double equals since id can be numeric or string
             });
 
-            if (duplicateIndex !== -1) {
+            if (duplicateIndex != -1) {
                 elementConnections.splice(duplicateIndex, 1);
             }
         });

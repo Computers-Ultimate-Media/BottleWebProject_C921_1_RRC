@@ -41,14 +41,19 @@ def calculate_request():
         return bottle.HTTPResponse(status=400)
 
 
-
-@get('/result')
+@route('/result')
+@view('result')
 def result_page():
     db_id = request.query.id
-    a = select_one(f"select * from requests where id={db_id}")
+    a = select_one(f"select output from bottle_db.requests where id={db_id}")
 
-    return "DB table record id: {0}".format(a)
-    #return redirect('/result')
+    return dict(
+        title='bfs',
+        year=datetime.now().year,
+        graph=a[0]
+    )
+    #return "DB table record id: {0}".format(a)
+    # return redirect('/result')
 
 
 @route('/bfs')
