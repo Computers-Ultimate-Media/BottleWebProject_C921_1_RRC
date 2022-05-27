@@ -2,6 +2,7 @@ import json
 
 from BottleWebProject_C921_1_RRC.database import insert, select_one
 from BottleWebProject_C921_1_RRC.modules.bfs import bfs
+from BottleWebProject_C921_1_RRC.modules.dfs import dfs
 from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix, matrix_to_json
 
 
@@ -19,6 +20,8 @@ def handle_request(data: dict) -> int:
         matrix_out = bfs(matrix_in, start)
         pass
     elif alg_type == 2:
+        start = int(data["StartNode"])
+        matrix_out = dfs(matrix_in, start)
         pass
     elif alg_type == 3:
         pass
