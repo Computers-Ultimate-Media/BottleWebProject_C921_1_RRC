@@ -9,9 +9,9 @@ from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix, ma
 def handle_request(data: dict) -> int:
     alg_type = data.get("AlgType")
     alg_type = int(alg_type)
-    graph_in = str(data["Graph"])
+    graph_id = str(data["Graph"])
 
-    matrix_in: list[list[int]] = json_to_matrix(graph_in)
+    matrix_in: list[list[int]] = json_to_matrix(graph_id)
     matrix_out: list[list[int]] = list[list[int]]()
     start = -1
 

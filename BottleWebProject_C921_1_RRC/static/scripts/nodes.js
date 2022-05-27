@@ -126,7 +126,6 @@ function saveEdgeData(data, callback) {
     if (typeof data.to === "object") data.to = data.to.id;
     if (typeof data.from === "object") data.from = data.from.id;
     data.label = document.getElementById("edge-label").value;
-    console.log(data.label)
     clearEdgePopUp();
     callback(data);
 }
@@ -141,7 +140,7 @@ function getEdges(edges){
         ed.push({
             fromId: elem.fromId,
             toId: elem.toId,
-            label: elem.labelModule.lines[0].blocks[0].text
+            weight: elem.labelModule.lines[0].blocks[0].text
        });
     });
     return ed;
@@ -151,22 +150,31 @@ function exportNetwork() {
     let nodes = objectToArray(network.getPositions());
     nodes.forEach(addConnections);
 
-    let edges = getEdges(objectToArray(network.nodesHandler.body.edges));
-
-    var e = document.getElementById("first_node");
-    var select_node = e.options[e.selectedIndex].value;
-
     var l = document.getElementById("mynetwork");
     var algType = l.dataset.algType
 
-    var calculate_request = {
-        "AlgType" : algType,
-        "Graph" : {
-            "Nodes" : JSON.stringify(nodes, undefined, 2),
-            "Edges" : edges
-        },
-        "StartNode" : select_node
-    };
+    if(algType == 1 || algType==2){
+        var e = document.getElementById("first_node");
+        var select_node = e.options[e.selectedIndex].value;
+
+        var calculate_request = {
+            "AlgType" : algType,
+            "Graph" : {
+                "Nodes" : JSON.stringify(nodes, undefined, 2)
+            },
+            "StartNode" : select_node
+        };
+    }
+    else {
+        let edges = getEdges(objectToArray(network.nodesHandler.body.edges));
+        var calculate_request = {
+            "AlgType" : algType,
+            "Graph" : {
+                "Nodes" : JSON.stringify(nodes, undefined, 2),
+                "Edges" : JSON.stringify(edges)
+            }
+        };
+    }
 
     let request = new XMLHttpRequest();
     request.open("POST", "calculate", false);
