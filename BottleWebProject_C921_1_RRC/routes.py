@@ -35,8 +35,9 @@ def calculate_request():
         response: dict = handle_request(data)
 
         return bottle.HTTPResponse(body=json_dumps(response), status=200)
-    finally:
+    except Exception as error:
         return bottle.HTTPResponse(status=400)
+
 
 
 @post('/bfs', method='post')

@@ -4,7 +4,8 @@ from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix, ma
 
 
 def handle_request(data: dict) -> dict:
-    alg_type = int(data.get("AlgType"))
+    alg_type = data.get("AlgType")
+    alg_type = int(alg_type)
     graph_in = str(data["Graph"])
 
     matrix_in: list[list[int]] = json_to_matrix(graph_in)
@@ -22,6 +23,7 @@ def handle_request(data: dict) -> dict:
         raise Exception("Unknown type of algorith")
 
     graph_out = matrix_to_json(matrix_out)
+    graph_in = matrix_to_json(matrix_in)
 
     save_to_database(alg_type, graph_in, graph_out)
 

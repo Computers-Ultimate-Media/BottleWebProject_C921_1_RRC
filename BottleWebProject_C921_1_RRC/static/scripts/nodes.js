@@ -93,6 +93,7 @@ function saveNodeData(data, callback) {
     addNewNodeInList();
 
     data.label = document.getElementById("node-id").value;
+    data.id = document.getElementById("node-id").value;
     clearNodePopUp();
     callback(data);
 }
@@ -141,7 +142,7 @@ function exportNetwork() {
     var select_node = e.options[e.selectedIndex].value;
 
     var calculate_request = {
-        "AltType" : 1,
+        "AlgType" : 1,
         "Graph" : JSON.stringify(nodes, undefined, 2),
         "StartNode" : select_node
     };
