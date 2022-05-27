@@ -22,6 +22,9 @@ def handle_request(data: dict) -> dict:
         raise Exception("Unknown type of algorith")
 
     graph_out = matrix_to_json(matrix_out)
+
+    save_to_database(alg_type, graph_in, graph_out)
+
     result = dict()
     result["Graph"] = graph_out
     return result
