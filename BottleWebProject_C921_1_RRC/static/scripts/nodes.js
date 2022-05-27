@@ -162,6 +162,71 @@ function objectToArray(obj) {
     });
 }
 
+
+function importNetwork() {
+    let l = document.getElementById("mynetwork");
+    let graph = l.dataset.graph
+
+    let inputData = JSON.parse(graph);
+
+    let data = {
+        nodes: getNodeData(inputData),
+        edges: getEdgeData(inputData),
+    };
+
+    network = new vis.Network(container, data, {});
+}
+
+function getNodeData(data) {
+    let networkNodes = [];
+
+    data.forEach(function (elem, index, array) {
+        networkNodes.push({
+            id: elem.id,
+            label: elem.id
+        });
+    });
+
+    return new vis.DataSet(networkNodes);
+}
+
+function getNodeById(data, id) {
+    for (let n = 0; n < data.length; n++) {
+        if (data[n].id === id) {
+            // double equals since id can be numeric or string
+            return data[n];
+        }
+    }
+    throw "Can not find id '" + id + "' in data";
+}
+
+function getEdgeData(data) {
+    let networkEdges = [];
+
+    data.forEach(function (node) {
+        // add the connection
+        node.connections.forEach(function (connId, cIndex, conns) {
+            networkEdges.push({from: node.id, to: connId});
+            let cNode = getNodeById(data, connId);
+
+            let elementConnections = cNode.connections;
+
+            // remove the connection from the other node to prevent duplicate connections
+            let duplicateIndex = elementConnections.findIndex(function (
+                connection
+            ) {
+                return connection === node.id; // double equals since id can be numeric or string
+            });
+
+            if (duplicateIndex !== -1) {
+                elementConnections.splice(duplicateIndex, 1);
+            }
+        });
+    });
+
+    return new vis.DataSet(networkEdges);
+}
+
 function init() {
     draw();
 }

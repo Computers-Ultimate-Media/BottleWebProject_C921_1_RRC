@@ -1,6 +1,8 @@
 import bottle
-from bottle import route, view, redirect, request, post
+from bottle import route, view, redirect, request, post, get
 from datetime import datetime
+
+from BottleWebProject_C921_1_RRC.database import select_one
 from modules import bfs, dfs, kruskal
 
 
@@ -40,11 +42,13 @@ def calculate_request():
 
 
 
-@post('/bfs', method='post')
-@post('/dfs', method='post')
-@post('/kruskal', method='post')
+@get('/result')
 def result_page():
-    return redirect('/result')
+    db_id = request.query.id
+    a = select_one(f"select * from requests where id={db_id}")
+
+    return "DB table record id: {0}".format(a)
+    #return redirect('/result')
 
 
 @route('/bfs')
