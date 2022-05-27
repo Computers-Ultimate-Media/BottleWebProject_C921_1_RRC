@@ -34,10 +34,12 @@ def calculate_request():
         decoded_request = request.body.getvalue().decode('utf-8')
         data: dict = json_loads(decoded_request)
 
-        response: dict = handle_request(data)
+        response: dict = dict()
+        response["RequestId"] = handle_request(data)
 
         return bottle.HTTPResponse(body=json_dumps(response), status=200)
     except Exception as error:
+        print(error)
         return bottle.HTTPResponse(status=400)
 
 
@@ -52,8 +54,6 @@ def result_page():
         year=datetime.now().year,
         graph=a[0]
     )
-    #return "DB table record id: {0}".format(a)
-    # return redirect('/result')
 
 
 @route('/bfs')

@@ -153,7 +153,15 @@ function exportNetwork() {
     let request = new XMLHttpRequest();
     request.open("POST", "calculate", false);
     request.send(JSON.stringify(calculate_request));
-    window.location.replace("http://localhost:5555/result?id=");
+
+    if (request.status === 200) {
+        let data = JSON.parse(request.responseText);
+        let id = data["RequestId"];
+        window.location.replace("http://localhost:5555/result?id=" + id);
+    }
+    else {
+        throw "Failed request:" + JSON.stringify(calculate_request);
+    }
 }
 
 function objectToArray(obj) {
