@@ -1,5 +1,7 @@
 import collections
 
+from BottleWebProject_C921_1_RRC.modules.fileConverter import matrix_to_json, json_to_matrix
+
 
 def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
     matrix_out = matrix_in.copy()
@@ -7,7 +9,7 @@ def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
         for j in range(len(matrix_in[0])):
             matrix_out[i][j] = 0
 
-    to_visit: collections.deque = collections.deque()
+    to_visit = [start]
     visited: set[int] = set[int]()
 
     to_visit.append(start)
@@ -21,3 +23,9 @@ def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
                 matrix_out[node][connid] = conn
                 matrix_out[connid][node] = conn
     return matrix_out
+
+
+# with open("json.txt") as f:
+#     lol = json_to_matrix(f.read())
+#     print( matrix_to_json(dfs(lol, 2)))
+

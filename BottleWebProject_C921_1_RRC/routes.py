@@ -31,6 +31,7 @@ def calculate_request():
     from BottleWebProject_C921_1_RRC.modules.requestHandler import handle_request
 
     try:
+
         decoded_request = request.body.getvalue().decode('utf-8')
         data: dict = json_loads(decoded_request)
 

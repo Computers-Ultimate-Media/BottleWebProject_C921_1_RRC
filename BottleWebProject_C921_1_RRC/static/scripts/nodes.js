@@ -126,6 +126,7 @@ function saveEdgeData(data, callback) {
     if (typeof data.to === "object") data.to = data.to.id;
     if (typeof data.from === "object") data.from = data.from.id;
     data.label = document.getElementById("edge-label").value;
+    console.log(data.label)
     clearEdgePopUp();
     callback(data);
 }
@@ -134,9 +135,23 @@ function addConnections(elem, index) {
     elem.connections = network.getConnectedNodes(index);
 }
 
+function getEdges(edges){
+    let ed = [];
+    edges.forEach(function (elem, index, array) {
+        ed.push({
+            fromId: elem.fromId,
+            toId: elem.toId,
+            label: elem.labelModule.lines[0].blocks[0].text
+       });
+    });
+    return ed;
+}
+
 function exportNetwork() {
     let nodes = objectToArray(network.getPositions());
     nodes.forEach(addConnections);
+
+    let edges = getEdges(objectToArray(network.nodesHandler.body.edges));
 
     var e = document.getElementById("first_node");
     var select_node = e.options[e.selectedIndex].value;
@@ -146,7 +161,10 @@ function exportNetwork() {
 
     var calculate_request = {
         "AlgType" : algType,
-        "Graph" : JSON.stringify(nodes, undefined, 2),
+        "Graph" : {
+            "Nodes" : JSON.stringify(nodes, undefined, 2),
+            "Edges" : edges
+        },
         "StartNode" : select_node
     };
 

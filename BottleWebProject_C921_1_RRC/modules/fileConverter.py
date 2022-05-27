@@ -28,7 +28,7 @@ def matrix_to_json(matrix: list[list[int]]) -> str:
 
         for idval, value in enumerate(node):
             if value > 0:
-                conns.append(idval)
+                conns.append(value)
 
         data.append(dict(
             id=str(idnode),

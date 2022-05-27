@@ -62,4 +62,4 @@ def mark_start_node(json_graph: str, start: int) -> str:
 
     data[start_node_id]["color"] = {"background": "#fb7e81"}
 
-    return json.dumps(data)
+    return json.dumps(data, indent=2)
