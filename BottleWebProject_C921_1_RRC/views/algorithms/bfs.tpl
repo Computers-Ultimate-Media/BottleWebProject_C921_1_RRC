@@ -81,7 +81,7 @@
 <body onload="init();">
 
 <label style="font-size: 20px" for="first_node">Выберите начальный узел</label>
-<select id="first_node" style="margin: 50px" onchange="choose_node();"></select>
+<select id="first_node" style="margin: 50px"></select>
 
 
 <div id="node-popUp">
