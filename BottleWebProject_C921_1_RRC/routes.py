@@ -1,3 +1,4 @@
+import bottle
 from bottle import route, view, redirect, request, post
 from datetime import datetime
 from modules import bfs, dfs, kruskal
@@ -33,10 +34,9 @@ def calculate_request():
 
         response: dict = handle_request(data)
 
-        response["Status"] = 200
-        return json_dumps(response)
+        return bottle.HTTPResponse(body=json_dumps(response), status=200)
     finally:
-        return json_dumps({"Status": 400})
+        return bottle.HTTPResponse(status=400)
 
 
 @post('/bfs', method='post')

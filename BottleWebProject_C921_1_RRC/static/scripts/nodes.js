@@ -137,9 +137,18 @@ function exportNetwork() {
     let nodes = objectToArray(network.getPositions());
     nodes.forEach(addConnections);
 
+    var e = document.getElementById("first_node");
+    var select_node = e.options[e.selectedIndex].value;
+
+    var calculate_request = {
+        "AltType" : 1,
+        "Graph" : JSON.stringify(nodes, undefined, 2),
+        "StartNode" : select_node
+    };
+
     let request = new XMLHttpRequest();
-    request.open("POST", "check_result", false);
-    request.send(JSON.stringify(nodes, undefined, 2));
+    request.open("POST", "calculate", false);
+    request.send(JSON.stringify(calculate_request));
 }
 
 function objectToArray(obj) {
