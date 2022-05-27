@@ -107,7 +107,7 @@
     <input type="button" value="cancel" id="edge-cancelButton"/>
 </div>
 <br/>
-<div id="mynetwork"></div>
+<div id="mynetwork" data-alg-type="1"></div>
 
 <input type="button" id="export_button" onclick="return exportNetwork()" value="Выполнить!" />
 </body>

@@ -141,8 +141,11 @@ function exportNetwork() {
     var e = document.getElementById("first_node");
     var select_node = e.options[e.selectedIndex].value;
 
+    var l = document.getElementById("mynetwork");
+    var algType = l.dataset.algType
+
     var calculate_request = {
-        "AlgType" : 1,
+        "AlgType" : algType,
         "Graph" : JSON.stringify(nodes, undefined, 2),
         "StartNode" : select_node
     };
