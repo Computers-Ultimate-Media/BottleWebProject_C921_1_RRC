@@ -1,19 +1,23 @@
-def dfs(graphic, start, visited=None):
-    if visited is None:
-        visited = set()
-    visited.add(start)
-
-    print(start)
-
-    for next in graphic[start] - visited:
-        dfs(graphic, next, visited)
-    return visited
+import collections
 
 
-graph = {'0': {'1', '2'},
-         '1': {'0', '3', '4'},
-         '2': {'0'},
-         '3': {'1'},
-         '4': {'2', '3'}}
+def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
+    matrix_out = matrix_in.copy()
+    for i in range(len(matrix_out)):
+        for j in range(len(matrix_in[0])):
+            matrix_out[i][j] = 0
 
-dfs(graph, '1')
+    to_visit: collections.deque = collections.deque()
+    visited: set[int] = set[int]()
+
+    to_visit.append(start)
+    while not len(to_visit) == 0:
+        node = to_visit.popleft()
+        visited.add(node)
+        for connid, conn in enumerate(matrix_in[node]):
+            if connid not in visited and conn > 0:
+                to_visit.appendleft(connid)
+                visited.add(connid)
+                matrix_out[node][connid] = conn
+                matrix_out[connid][node] = conn
+    return matrix_out
