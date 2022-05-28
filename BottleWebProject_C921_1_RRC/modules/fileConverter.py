@@ -4,10 +4,10 @@ import numpy as np
 
 # Конвертер графа из json формата библиотеки vis.js в матрицу смежности
 def json_to_matrix(graph: dict) -> list[list[int]]:
-    nodes = json.loads(graph["Nodes"])
+    nodes = graph["Nodes"]
     has_edges = "Edges" in graph.keys()
     if has_edges:
-        edges = json.loads(graph["Edges"])
+        edges = graph["Edges"]
 
     sorted(nodes, key=lambda x: x['id'])
     node_num: int = len(nodes)

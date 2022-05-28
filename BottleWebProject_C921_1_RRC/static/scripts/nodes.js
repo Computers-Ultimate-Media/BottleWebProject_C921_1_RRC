@@ -160,7 +160,7 @@ function exportNetwork() {
         var calculate_request = {
             "AlgType" : algType,
             "Graph" : {
-                "Nodes" : JSON.stringify(nodes, undefined, 2)
+                "Nodes" : nodes
             },
             "StartNode" : select_node
         };
@@ -170,8 +170,8 @@ function exportNetwork() {
         var calculate_request = {
             "AlgType" : algType,
             "Graph" : {
-                "Nodes" : JSON.stringify(nodes, undefined, 2),
-                "Edges" : JSON.stringify(edges)
+                "Nodes" : nodes,
+                "Edges" : edges
             }
         };
     }
