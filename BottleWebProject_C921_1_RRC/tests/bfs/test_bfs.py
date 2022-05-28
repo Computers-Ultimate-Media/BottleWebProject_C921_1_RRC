@@ -1,3 +1,4 @@
+import json
 import unittest
 
 from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix
@@ -7,7 +8,8 @@ from BottleWebProject_C921_1_RRC.modules.bfs import bfs
 class TestBFS(unittest.TestCase):
     def test_no_error(self):
         with open("C:\\Users\\max\\PycharmProjects\\BottleWebProject_C921_1_RRC\\BottleWebProject_C921_1_RRC\\tests\\bfs\\graph_bfs_default.json") as f:
-            matrix = json_to_matrix(f.read())
+            text = f.read()
+            matrix = json_to_matrix(json.loads(text))
         res = bfs(matrix, 0)
         self.assertIsNotNone(res)
 
