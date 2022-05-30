@@ -1,9 +1,8 @@
 import bottle
-from bottle import route, view, redirect, request, post, get
+from bottle import route, view, request
 from datetime import datetime
 
 from BottleWebProject_C921_1_RRC.database import select_one
-from modules import bfs, dfs, kruskal
 
 
 @route('/')
