@@ -39,3 +39,6 @@ for r in sorted_graph:  # проходим по ребрам второй раз
         D[r[2]] += gr1
 
 print(edges)
+
+def kruckal(graph : list[list[int]]) -> list[list[int]]:
+    return graph
