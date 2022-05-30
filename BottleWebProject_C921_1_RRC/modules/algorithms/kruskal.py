@@ -40,5 +40,5 @@ for r in sorted_graph:  # проходим по ребрам второй раз
 
 print(edges)
 
-def kruckal(graph : list[list[int]]) -> list[list[int]]:
+def kruskal(graph : list[list[int]]) -> list[list[int]]:
     return graph
