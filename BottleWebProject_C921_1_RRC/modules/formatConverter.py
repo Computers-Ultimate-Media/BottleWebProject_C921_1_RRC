@@ -2,8 +2,8 @@ import json
 import numpy as np
 
 
-# Конвертер графа из json формата библиотеки vis.js в матрицу смежности
-def json_to_matrix(graph: dict) -> list[list[int]]:
+# Конвертер графа из словаря формата библиотеки vis.js в матрицу смежности
+def data_to_matrix(graph: dict) -> list[list[int]]:
     nodes = graph["Nodes"]
     has_edges = "Edges" in graph.keys()
     if has_edges:
@@ -33,8 +33,8 @@ def json_to_matrix(graph: dict) -> list[list[int]]:
     return matrix
 
 
-# Конвертер графа из матрицы смежности в json формат библиотеки vis.js
-def matrix_to_json(matrix: list[list[int]]) -> str:
+# Конвертер графа из матрицы смежности в словарь формата библиотеки vis.js
+def matrix_to_data(matrix: list[list[int]]) -> str:
     nodes = list()
     for idnode, node in enumerate(matrix):
         conns = list()
