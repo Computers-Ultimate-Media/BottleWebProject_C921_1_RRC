@@ -1,5 +1,4 @@
-import bottle
-from bottle import route, view, request
+from bottle import route, view, request, HTTPResponse
 from datetime import datetime
 
 from BottleWebProject_C921_1_RRC.database import select_one
@@ -37,10 +36,10 @@ def calculate_request():
         response: dict = dict()
         response["RequestId"] = handle_request(data)
 
-        return bottle.HTTPResponse(body=json_dumps(response), status=200)
+        return HTTPResponse(body=json_dumps(response), status=200)
     except Exception as error:
         print(error)
-        return bottle.HTTPResponse(status=400)
+        return HTTPResponse(status=400)
 
 
 @route('/result')
