@@ -1,8 +1,8 @@
 import json
 
 from BottleWebProject_C921_1_RRC.database import insert, select_one
-from BottleWebProject_C921_1_RRC.modules.bfs import bfs
-from BottleWebProject_C921_1_RRC.modules.dfs import dfs
+from BottleWebProject_C921_1_RRC.modules.algorithms.bfs import bfs
+from BottleWebProject_C921_1_RRC.modules.algorithms.dfs import dfs
 from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix, matrix_to_json
 
 

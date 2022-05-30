@@ -2,7 +2,7 @@ import json
 import unittest
 
 from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix
-from BottleWebProject_C921_1_RRC.modules.bfs import bfs
+from BottleWebProject_C921_1_RRC.modules.algorithms.bfs import bfs
 
 
 class TestBFS(unittest.TestCase):
