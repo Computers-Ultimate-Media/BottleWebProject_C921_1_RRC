@@ -22,9 +22,9 @@ def json_to_matrix(graph: dict) -> list[list[int]]:
                matrix[id][target] = 1
     else:
         for edge in edges:
-            to_id: int = int(edge["toId"])
-            from_id: int = int(edge["fromId"])
-            weight: int = int(edge["weight"])
+            to_id: int = int(edge[1])
+            from_id: int = int(edge[2])
+            weight: int = int(edge[0])
             matrix[to_id][from_id] = weight
             matrix[from_id][to_id] = weight
 

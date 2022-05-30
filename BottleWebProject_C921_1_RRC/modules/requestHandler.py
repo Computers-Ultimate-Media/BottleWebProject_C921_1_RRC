@@ -3,8 +3,8 @@ import json
 from BottleWebProject_C921_1_RRC.database import insert, select_one
 from BottleWebProject_C921_1_RRC.modules.algorithms.bfs import bfs
 from BottleWebProject_C921_1_RRC.modules.algorithms.dfs import dfs
+from BottleWebProject_C921_1_RRC.modules.algorithms.kruskal import kruskal
 from BottleWebProject_C921_1_RRC.modules.fileConverter import json_to_matrix, matrix_to_json
-
 
 def handle_request(data: dict) -> int:
     alg_type = data.get("AlgType")
@@ -18,21 +18,26 @@ def handle_request(data: dict) -> int:
     if alg_type == 1:
         start = int(data["StartNode"])
         matrix_out = bfs(matrix_in, start)
-        pass
+
     elif alg_type == 2:
         start = int(data["StartNode"])
         matrix_out = dfs(matrix_in, start)
-        pass
+
     elif alg_type == 3:
-        pass
+        connections = data["Graph"]["Connections"]
+        connections = kruskal(connections)
     else:
         raise Exception("Unknown type of algorith")
 
     graph_out = matrix_to_json(matrix_out)
-    graph_in = matrix_to_json(matrix_in)
 
     if not start == -1:
         graph_out = mark_start_node(graph_out, start)
+
+    if alg_type == 3:
+        graph_changed = json.loads(graph_out)
+        graph_changed["Connections"] = connections
+        graph_out = json.dumps(graph_changed)
 
     request_id = save_to_database(alg_type, graph_in, graph_out)
     return request_id
