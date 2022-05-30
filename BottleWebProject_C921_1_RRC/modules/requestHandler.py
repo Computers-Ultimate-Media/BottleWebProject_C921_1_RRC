@@ -39,7 +39,7 @@ def handle_request(data: dict) -> int:
         graph_changed["Connections"] = connections
         graph_out = json.dumps(graph_changed)
 
-    request_id = save_to_database(alg_type, graph_in, graph_out)
+    request_id = save_to_database(alg_type, json.dumps(graph_in), graph_out)
     return request_id
 
 

@@ -204,8 +204,16 @@ function importNetwork() {
 
     let inputData = JSON.parse(graph);
 
+    let _nodes;
+    if ("nodes" in inputData) {
+        _nodes = inputData.nodes;
+    }
+    else {
+        _nodes = inputData;
+    }
+
     let data = {
-        nodes: getNodeData(inputData),
+        nodes: getNodeData(_nodes),
         edges: getEdgeData(inputData)
     };
 
@@ -216,10 +224,16 @@ function getNodeData(data) {
     let networkNodes = [];
 
     data.forEach(function (elem, index, array) {
-        networkNodes.push({
+        let nod = {
             id: elem.id,
             label: elem.id
-        });
+        }
+
+        if ("color" in elem) {
+            nod.color = elem.color.background
+        }
+
+        networkNodes.push(nod);
     });
 
     return new vis.DataSet(networkNodes);
