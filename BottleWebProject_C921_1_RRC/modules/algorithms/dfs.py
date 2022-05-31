@@ -1,10 +1,8 @@
-import collections
-
-from BottleWebProject_C921_1_RRC.modules.formatConverter import matrix_to_data, data_to_matrix
+from copy import deepcopy
 
 
 def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
-    matrix_out = matrix_in.copy()
+    matrix_out = deepcopy(matrix_in)
     for i in range(len(matrix_out)):
         for j in range(len(matrix_in[0])):
             matrix_out[i][j] = 0
@@ -12,20 +10,36 @@ def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
     to_visit = [start]
     visited: set[int] = set[int]()
 
+    stack: list = list()
+
     to_visit.append(start)
     while not len(to_visit) == 0:
-        node = to_visit.popleft()
-        visited.add(node)
+        node = to_visit.pop()
+
+        if node not in visited and node != start:
+            connected_node = stack.pop()
+            visited.add(node)
+            matrix_out[node][connected_node] = 1
+            matrix_out[connected_node][node] = 1
+
         for connid, conn in enumerate(matrix_in[node]):
             if connid not in visited and conn > 0:
-                to_visit.appendleft(connid)
-                visited.add(connid)
-                matrix_out[node][connid] = conn
-                matrix_out[connid][node] = conn
+                to_visit.append(connid)
+                stack.append(node)
+
     return matrix_out
 
-
-# with open("json.txt") as f:
-#     lol = json_to_matrix(f.read())
-#     print( matrix_to_json(dfs(lol, 2)))
-
+# matrix = [[0, 1, 1, 1, 1, 0, 0, 0],
+#           [1, 0, 1, 0, 1, 0, 0, 1],
+#           [1, 1, 0, 0, 1, 1, 0, 0],
+#           [1, 0, 0, 0, 0, 0, 0, 0],
+#           [1, 1, 1, 0, 0, 0, 1, 0],
+#           [0, 0, 1, 0, 0, 0, 1, 1],
+#           [0, 0, 0, 0, 1, 1, 0, 0],
+#           [0, 1, 0, 0, 0, 1, 0, 0]]
+# res = dfs(matrix, 1)
+# data = matrix_to_data(res)
+# data2 = matrix_to_data(matrix)
+# print(data)
+# print(data2)
+# print(res)
