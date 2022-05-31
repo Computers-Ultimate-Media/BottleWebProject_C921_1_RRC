@@ -202,14 +202,17 @@ function importNetwork() {
     let container = document.getElementById("mynetwork");
     let graph = container.dataset.graph
 
-    let inputData = JSON.parse(graph);
+    let inputData = JSON.parse(JSON.parse(graph));
 
     let _nodes;
-    if ("nodes" in inputData) {
-        _nodes = inputData.nodes;
+    try{
+        if("nodes" in inputData){
+            _nodes = inputData.nodes;}
+        else{
+            _nodes = inputData;
+        }
     }
-    else {
-        _nodes = inputData;
+    catch (e) {
     }
 
     let data = {
