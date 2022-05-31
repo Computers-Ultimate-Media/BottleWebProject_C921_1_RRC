@@ -1,9 +1,16 @@
 import unittest
 
-from BottleWebProject_C921_1_RRC.modules.formatConverter import data_to_matrix
+from BottleWebProject_C921_1_RRC.modules.formatConverter import data_to_matrix, matrix_to_data
 
 
 class TestFileConverter(unittest.TestCase):
+    def test_no_errors(self):
+        matrix_correct = [[0, 1, 1, 1, 1, 0, 0, 0], [1, 0, 1, 1, 1, 0, 0, 1], [1, 1, 0, 1, 1, 1, 0, 0],
+                          [1, 1, 1, 0, 1, 0, 0, 0], [1, 1, 1, 1, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0, 1, 1],
+                          [0, 0, 0, 0, 1, 1, 0, 0], [0, 1, 0, 0, 0, 1, 0, 0]]
+        json = matrix_to_data(matrix_correct)
+        self.assertIsNotNone(json)
+
     def test_converting_both_ways(self):
         data = {'Nodes': [{'x': -53, 'y': -98, 'id': '0', 'connections': ['2', '1', '3', '4']},
                           {'x': 80, 'y': -30, 'id': '1', 'connections': ['0', '2', '3', '4', '7']},
