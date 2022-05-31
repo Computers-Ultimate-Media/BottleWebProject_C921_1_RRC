@@ -100,7 +100,7 @@ function saveNodeData(data, callback) {
 
 function editEdgeWithoutDrag(data, callback) {
     // filling in the popup DOM elements
-    document.getElementById("edge-label").value = data.label;
+    document.getElementById("edge-label").value = "";
     document.getElementById("edge-saveButton").onclick = saveEdgeData.bind(
         this,
         data,
