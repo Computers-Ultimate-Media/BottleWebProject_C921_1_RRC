@@ -92,8 +92,8 @@
             <td><input id="node-id" value="" readonly/></td>
         </tr>
     </table>
-    <input type="button" value="save" id="node-saveButton"/>
-    <input type="button" value="cancel" id="node-cancelButton"/>
+    <input type="button" value="Сохранить" id="node-saveButton"/>
+    <input type="button" value="Отменить" id="node-cancelButton"/>
 </div>
 <div id="edge-popUp">
     <span id="edge-operation">edge</span> <br/>
@@ -103,8 +103,8 @@
             <td><input id="edge-label" value="new value"/></td>
         </tr>
     </table>
-    <input type="button" value="save" id="edge-saveButton"/>
-    <input type="button" value="cancel" id="edge-cancelButton"/>
+    <input type="button" value="Сохранит" id="edge-saveButton"/>
+    <input type="button" value="Отменить" id="edge-cancelButton"/>
 </div>
 <br/>
 <div id="mynetwork" data-alg-type="2"></div>
