@@ -1,4 +1,5 @@
 import json
+
 import numpy as np
 
 
@@ -28,7 +29,7 @@ def data_to_matrix(graph: dict) -> list[list[int]]:
             matrix[to_id][from_id] = weight
             matrix[from_id][to_id] = weight
 
-    matrix.tolist()
+    matrix = matrix.tolist()
     # noinspection PyTypeChecker
     return matrix
 

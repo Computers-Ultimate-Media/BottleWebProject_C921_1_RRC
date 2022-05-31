@@ -1,8 +1,9 @@
 import collections
+from copy import deepcopy
 
 
 def bfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
-    matrix_out = matrix_in.copy()
+    matrix_out = deepcopy(matrix_in)
     for i in range(len(matrix_out)):
         for j in range(len(matrix_in[0])):
             matrix_out[i][j] = 0
