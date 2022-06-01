@@ -1,20 +1,20 @@
 % rebase('layout.tpl', title=title, year=year)
-
-<h2>{{ title }}.</h2>
-<br/>
-<address>
+<br>
+<h2>{{ title }}</h2>
+<div class="contact-block">
     <h4>
-        <img class="img-circle" width="200" src="../static/images/andrey_with_cat.png" alt=""/>
-        <br>
-        <strong>Github dev #1:</strong> <a href="https://github.com/rybakov1">Рыбаков Владислав</a>
-        <br/>
-        <img class="img-circle" width="200" src="../static/images/andrey_with_cat.png" alt=""/>
-        <br>
-        <strong>Github dev #2:</strong> <a href="https://github.com/MaximilianWithTheRose">Рыбаков Максим</a>
-        <br/>
-        <img class="img-circle" width="200" src="../static/images/andrey_with_cat.png" alt=""/>
-        <br>
-        <strong>Github dev #3:</strong> <a href="https://github.com/DrOnGeE">Чиновников Андрей</a>
+        <div class="contact-elem">
+            <img class="img-circle" width="300" src="../static/content/images/andrey_with_cat.png" alt=""/>
+            <strong>Frontend разработчик:</strong> <a href="https://github.com/rybakov1">Рыбаков Владислав</a>
+        </div>
+        <div class="contact-elem">
+            <img class="img-circle" width="300" src="../static/content/images/andrey_with_cat.png" alt=""/>
+            <strong>Backend разработчик:</strong> <a href="https://github.com/MaximilianWithTheRose">Рыбаков Максим</a>
+        </div>
+        <div class="contact-elem">
+            <img class="img-circle" width="300" src="../static/content/images/andrey_with_cat.png" alt=""/>
+            <strong>Backend разработчик:</strong> <a href="https://github.com/DrOnGeE">Чиновников Андрей</a>
+        </div>
     </h4>
-</address>
+</div>
 

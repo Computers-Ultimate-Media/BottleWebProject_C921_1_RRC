@@ -49,7 +49,7 @@ def result_page():
     a = select_one(f"select output from bottle_db.requests where id={db_id}")
 
     return dict(
-        title='bfs',
+        title='result page',
         year=datetime.now().year,
         graph=a[0]
     )

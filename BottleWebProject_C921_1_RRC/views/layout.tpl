@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - My Bottle Application</title>
-    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/content/site.css"/>
-    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/site.css"/>
+    <script src="../static/scripts/generated/modernizr-2.6.2.js"></script>
 </head>
 
 <body>
@@ -18,15 +18,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">Spanning tree</a>
+            <a href="/" class="navbar-brand">Остовные деревья</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/bfs">BFS algorithm</a></li>
-                <li><a href="/dfs">DFS algorithm</a></li>
-                <li><a href="/kruskal">Kruskal's algorithm</a></li>
-                <li><a href="/contact">Contacts</a></li>
+                <li><a href="/home">Главная</a></li>
+                <li><a href="/bfs">Алгоритм BFS</a></li>
+                <li><a href="/dfs">Алгоритм DFS</a></li>
+                <li><a href="/kruskal">Алгоритм Краскала</a></li>
+                <li><a href="/contact">Разработчики</a></li>
             </ul>
         </div>
     </div>
@@ -40,9 +40,9 @@
     </footer>
 </div>
 
-<script src="/static/scripts/jquery-1.10.2.js"></script>
-<script src="/static/scripts/bootstrap.js"></script>
-<script src="/static/scripts/respond.js"></script>
+<script src="../static/scripts/generated/jquery-1.10.2.js"></script>
+<script src="../static/scripts/generated/bootstrap.js"></script>
+<script src="../static/scripts/generated/respond.js"></script>
 
 </body>
 </html>

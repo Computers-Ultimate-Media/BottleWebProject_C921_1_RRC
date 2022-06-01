@@ -1,0 +1,1 @@
+{'AlgType': '1', 'Graph': {'Nodes': [{'x': -84, 'y': -28, 'id': '0', 'connections': ['3', '1']}, {'x': 13, 'y': -79, 'id': '1', 'connections': ['0', '3']}, {'x': 115, 'y': 97, 'id': '2', 'connections': ['3']}, {'x': 9, 'y': 37, 'id': '3', 'connections': ['0', '1', '2']}]}, 'StartNode': '2'}

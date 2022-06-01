@@ -134,14 +134,14 @@ function addConnections(elem, index) {
     elem.connections = network.getConnectedNodes(index);
 }
 
-function getEdges(edges){
+function getEdges(edges) {
     let ed = [];
     edges.forEach(function (elem, index, array) {
         ed.push({
             fromId: elem.fromId,
             toId: elem.toId,
             weight: elem.labelModule.lines[0].blocks[0].text
-       });
+        });
     });
     return ed;
 }
@@ -150,28 +150,28 @@ function exportNetwork() {
     let nodes = objectToArray(network.getPositions());
     nodes.forEach(addConnections);
 
-    var l = document.getElementById("mynetwork");
-    var algType = l.dataset.algType
+    let l = document.getElementById("mynetwork");
+    let algType = l.dataset.algType
+    let calculate_request;
 
-    if(algType == 1 || algType==2){
-        var e = document.getElementById("first_node");
-        var select_node = e.options[e.selectedIndex].value;
+    if (algType == 1 || algType == 2) {
+        let e = document.getElementById("first_node");
+        let select_node = e.options[e.selectedIndex].value;
 
-        var calculate_request = {
-            "AlgType" : algType,
-            "Graph" : {
-                "Nodes" : nodes
+        calculate_request = {
+            "AlgType": algType,
+            "Graph": {
+                "Nodes": nodes
             },
-            "StartNode" : select_node
+            "StartNode": select_node
         };
-    }
-    else {
+    } else {
         let edges = getEdges(objectToArray(network.nodesHandler.body.edges));
-        var calculate_request = {
-            "AlgType" : algType,
-            "Graph" : {
-                "Nodes" : nodes,
-                "Edges" : edges
+        calculate_request = {
+            "AlgType": algType,
+            "Graph": {
+                "Nodes": nodes,
+                "Edges": edges
             }
         };
     }
@@ -184,8 +184,7 @@ function exportNetwork() {
         let data = JSON.parse(request.responseText);
         let id = data["RequestId"];
         window.location.replace("http://localhost:5555/result?id=" + id);
-    }
-    else {
+    } else {
         throw "Failed request:" + JSON.stringify(calculate_request);
     }
 }

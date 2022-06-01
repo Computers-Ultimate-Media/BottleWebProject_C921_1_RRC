@@ -40,3 +40,16 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.contact-block {
+    margin: 20px;
+}
+
+.contact-elem {
+    margin: 20px;
+}
+
+.index-elem {
+    width: auto;
+    min-height: 250px;
+}
