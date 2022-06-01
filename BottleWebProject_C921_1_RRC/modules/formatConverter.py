@@ -8,7 +8,7 @@ def data_to_matrix(graph: dict) -> list[list[int]]:
     nodes = graph["Nodes"]
     has_edges = "Edges" in graph.keys()
     if has_edges:
-        edges = graph["Edges"]
+        return [[]]
 
     sorted(nodes, key=lambda x: x['id'])
     node_num: int = len(nodes)

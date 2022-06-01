@@ -10,7 +10,7 @@ function draw() {
     edges = [];
     let container = document.getElementById("mynetwork");
     let options = {
-        layout: {randomSeed: seed},
+        layout: { randomSeed: seed },
         locale: "ru",
         manipulation: {
             addNode: function (data, callback) {
@@ -79,11 +79,16 @@ function removeOptions() {
 }
 
 function addNewNodeInList() {
-    const select = document.getElementById("first_node");
-    removeOptions();
+    try {
+        const select = document.getElementById("first_node");
+        removeOptions();
 
-    for (let index in nodes) {
-        select.options[select.options.length] = new Option(nodes[index], index);
+        for (let index in nodes) {
+            select.options[select.options.length] = new Option(nodes[index], index);
+        }
+    }
+    catch (err) {
+
     }
 }
 
@@ -204,19 +209,23 @@ function importNetwork() {
     let inputData = JSON.parse(JSON.parse(graph));
 
     let _nodes;
-    try{
-        if("nodes" in inputData){
-            _nodes = inputData.nodes;}
-        else{
-            _nodes = inputData;
+    let _edges;
+    try {
+        if ("Nodes" in inputData) {
+            _nodes = getNodeData(inputData.Nodes);
+            _edges = getCustomEdgeData(inputData.Edges);
+        }
+        else {
+            _nodes = getNodeData(inputData);
+            _edges = getEdgeData(inputData);
         }
     }
     catch (e) {
     }
 
     let data = {
-        nodes: getNodeData(_nodes),
-        edges: getEdgeData(inputData)
+        nodes: _nodes,
+        edges: _edges
     };
 
     network = new vis.Network(container, data, {});
@@ -257,7 +266,7 @@ function getEdgeData(data) {
     data.forEach(function (node) {
         // add the connection
         node.connections.forEach(function (connId, cIndex, conns) {
-            networkEdges.push({from: node.id, to: connId});
+            networkEdges.push({ from: node.id, to: connId });
             let cNode = getNodeById(data, connId);
 
             let elementConnections = cNode.connections;
@@ -275,6 +284,19 @@ function getEdgeData(data) {
         });
     });
 
+    return new vis.DataSet(networkEdges);
+}
+
+function getCustomEdgeData(data) {
+    let networkEdges = [];
+
+    data.forEach(function (edge) {
+        networkEdges.push({
+            from: edge.toId,
+            to: edge.fromId,
+            label: edge.weight
+        });
+    });
     return new vis.DataSet(networkEdges);
 }
 

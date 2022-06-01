@@ -6,6 +6,7 @@ from BottleWebProject_C921_1_RRC.modules.algorithms.dfs import dfs
 from BottleWebProject_C921_1_RRC.modules.algorithms.kruskal import kruskal
 from BottleWebProject_C921_1_RRC.modules.formatConverter import data_to_matrix, matrix_to_data
 
+
 def handle_request(data: dict) -> int:
     alg_type = data.get("AlgType")
     alg_type = int(alg_type)
@@ -24,7 +25,7 @@ def handle_request(data: dict) -> int:
         matrix_out = dfs(matrix_in, start)
 
     elif alg_type == 3:
-        connections = data["Graph"]["Connections"]
+        connections = data["Graph"]["Edges"]
         connections = kruskal(connections)
     else:
         raise Exception("Unknown type of algorith")
@@ -35,9 +36,8 @@ def handle_request(data: dict) -> int:
         graph_out = mark_start_node(graph_out, start)
 
     if alg_type == 3:
-        graph_changed = json.loads(graph_out)
-        graph_changed["Connections"] = connections
-        graph_out = json.dumps(graph_changed)
+        graph_in["Edges"] = connections
+        graph_out = json.dumps(graph_in)
 
     request_id = save_to_database(alg_type, json.dumps(graph_in), json.dumps(graph_out))
     return request_id

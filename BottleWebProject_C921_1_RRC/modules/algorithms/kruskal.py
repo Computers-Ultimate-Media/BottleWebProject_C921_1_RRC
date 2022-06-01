@@ -2,11 +2,12 @@
 # Алгоритм Краскала поиска минимального остова графа
 # -------------------------------------------------
 
-def kruskal(graph: list[list[int]]) -> list[list[int]]:
-    # -------------------------------------------------
-    # Алгоритм Краскала поиска минимального остова графа
-    # -------------------------------------------------
+def kruskal(data: list[dict[int]]) -> list[dict[int]]:
     # список ребер графа (длина, вершина 1, вершина 2)
+
+    graph: list[list[int]] = []
+    for conn in data:
+        graph.append([conn["weight"], conn["fromId"], conn["toId"]])
 
     sorted_graph = sorted(graph, key=lambda x: x[0])
     nodes = set()  # список соединенных вершин
@@ -37,5 +38,8 @@ def kruskal(graph: list[list[int]]) -> list[list[int]]:
             D[r[1]] += D[r[2]]  # объединем списки двух групп вершин
             D[r[2]] += gr1
 
+    data = list[dict[int]]()
+    for con in edges:
+        data.append({"weight": con[0], "fromId": con[1], "toId": con[2]})
 
-    return graph
+    return data
