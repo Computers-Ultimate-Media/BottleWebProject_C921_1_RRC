@@ -8,7 +8,7 @@
             <strong>Frontend разработчик:</strong> <a href="https://github.com/rybakov1">Рыбаков Владислав</a>
         </div>
         <div class="contact-elem">
-            <img class="img-circle" width="300" src="../static/content/images/andrey_with_cat.png" alt=""/>
+            <img class="img-circle" width="300" src="../static/content/images/max_without_cat.png" alt=""/>
             <strong>Backend разработчик:</strong> <a href="https://github.com/MaximilianWithTheRose">Рыбаков Максим</a>
         </div>
         <div class="contact-elem">
