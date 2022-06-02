@@ -137,7 +137,7 @@ function exportNetwork() {
 
     if (algType == 1 || algType == 2) {
         let e = document.getElementById("first_node");
-        let select_node = e.options[e.selectedIndex].value - 1;
+        let select_node = e.options[e.selectedIndex].value;
 
         calculate_request = {
             "AlgType": algType,
