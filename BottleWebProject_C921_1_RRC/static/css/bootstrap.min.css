@@ -281,8 +281,7 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.428571429;
     color: #333;
     background-color: #fff
@@ -676,6 +675,7 @@ pre code {
 }
 
 .container {
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -3813,9 +3813,11 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 
 .navbar-brand {
     float: left;
-    padding: 15px 15px;
-    font-size: 18px;
-    line-height: 20px
+    padding: 17px 15px;
+    font-size: 24px;
+    line-height: 20px;
+    font-weight: bold;
+
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
@@ -3902,7 +3904,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     }
 
     .navbar-nav > li > a {
-        padding-top: 15px;
+        padding-top: 18px;
         padding-bottom: 15px
     }
 }

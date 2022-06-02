@@ -46,12 +46,13 @@ def calculate_request():
 @view('result')
 def result_page():
     db_id = request.query.id
-    a = select_one(f"select output from bottle_db.requests where id={db_id}")
+    a = select_one(f"select input, output from bottle_db.requests where id={db_id}")
 
     return dict(
         title='Результат алгоритма',
         year=datetime.now().year,
-        graph=a[0]
+        result=a[1],
+        input=a[0]
     )
 
 

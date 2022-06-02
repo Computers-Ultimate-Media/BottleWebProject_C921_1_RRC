@@ -7,16 +7,11 @@
 
 <body onload="init();">
 
-<div id="node-popUp">
-    <span id="node-operation">node</span> <br/>
-    <table style="margin: auto">
-        <tr>
-            <td>id</td>
-            <td><input id="node-id" value="" readonly/></td>
-        </tr>
-    </table>
-    <input type="button" value="Сохранить" id="node-saveButton"/>
-    <input type="button" value="Отменить" id="node-cancelButton"/>
+<div class="text-dec t-l">{{ title }}.</div>
+<div class="text-dec t-n">
+    Данный раздел предназначен для вычисления графа алгоритмом Краскала. Вы можете построить неориентированный
+    граф, используя инструементы "Добавить узел" и "Добавить ребро" с указанием веса между ними. После выполнить
+    алгоритм, нажав на кнопку "Выполнить".
 </div>
 <div id="edge-popUp">
     <span id="edge-operation">edge</span> <br/>

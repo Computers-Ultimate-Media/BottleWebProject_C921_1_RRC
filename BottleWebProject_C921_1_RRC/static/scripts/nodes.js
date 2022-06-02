@@ -10,7 +10,7 @@ function draw() {
     edges = [];
     let container = document.getElementById("mynetwork");
     let options = {
-        layout: { randomSeed: seed },
+        layout: {randomSeed: seed},
         locale: "ru",
         manipulation: {
             addNode: function (data, callback) {
@@ -86,8 +86,7 @@ function addNewNodeInList() {
         for (let index in nodes) {
             select.options[select.options.length] = new Option(nodes[index], index);
         }
-    }
-    catch (err) {
+    } catch (err) {
 
     }
 }
@@ -192,6 +191,7 @@ function exportNetwork() {
     } else {
         throw "Failed request:" + JSON.stringify(calculate_request);
     }
+
 }
 
 function objectToArray(obj) {
@@ -202,9 +202,17 @@ function objectToArray(obj) {
 }
 
 
-function importNetwork() {
+function importNetwork(type) {
+
+
     let container = document.getElementById("mynetwork");
-    let graph = container.dataset.graph
+    let graph;
+
+    if (!type) {
+        graph = container.dataset.input
+    } else {
+        graph = container.dataset.result
+    }
 
     let inputData = JSON.parse(JSON.parse(graph));
 
@@ -214,13 +222,11 @@ function importNetwork() {
         if ("Nodes" in inputData) {
             _nodes = getNodeData(inputData.Nodes);
             _edges = getCustomEdgeData(inputData.Edges);
-        }
-        else {
+        } else {
             _nodes = getNodeData(inputData);
             _edges = getEdgeData(inputData);
         }
-    }
-    catch (e) {
+    } catch (e) {
     }
 
     let data = {
@@ -266,7 +272,7 @@ function getEdgeData(data) {
     data.forEach(function (node) {
         // add the connection
         node.connections.forEach(function (connId, cIndex, conns) {
-            networkEdges.push({ from: node.id, to: connId });
+            networkEdges.push({from: node.id, to: connId});
             let cNode = getNodeById(data, connId);
 
             let elementConnections = cNode.connections;
