@@ -10,7 +10,7 @@ function draw() {
     edges = [];
     let container = document.getElementById("mynetwork");
     let options = {
-        layout: {randomSeed: seed},
+        layout: { randomSeed: seed },
         locale: "ru",
         manipulation: {
             addNode: function (data, callback) {
@@ -75,7 +75,7 @@ function saveNodeData(data, callback) {
 
 function editEdgeWithoutDrag(data, callback) {
     // filling in the popup DOM elements
-    document.getElementById("edge-label").value = "";
+    document.getElementById("edge-label").value = "1";
     document.getElementById("edge-saveButton").onclick = saveEdgeData.bind(
         this,
         data,
@@ -183,15 +183,16 @@ function importNetwork(type) {
 
 
     let container = document.getElementById("mynetwork");
-    let graph;
+    let inputData;
 
     if (!type) {
-        graph = container.dataset.input
+        let graph = container.dataset.input;
+        inputData = JSON.parse(graph).Nodes;
     } else {
-        graph = container.dataset.result
+        let graph = container.dataset.result;
+        inputData = JSON.parse(JSON.parse(graph));
     }
 
-    let inputData = JSON.parse(JSON.parse(graph));
 
     let _nodes;
     let _edges;
@@ -249,7 +250,7 @@ function getEdgeData(data) {
     data.forEach(function (node) {
         // add the connection
         node.connections.forEach(function (connId, cIndex, conns) {
-            networkEdges.push({from: node.id, to: connId});
+            networkEdges.push({ from: node.id, to: connId });
             let cNode = getNodeById(data, connId);
 
             let elementConnections = cNode.connections;
