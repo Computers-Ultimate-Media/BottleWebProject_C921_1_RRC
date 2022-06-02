@@ -187,7 +187,12 @@ function importNetwork(type) {
 
     if (!type) {
         let graph = container.dataset.input;
-        inputData = JSON.parse(graph).Nodes;
+        let algType = container.dataset.algType;
+
+        if (algType == 3)
+            inputData = JSON.parse(graph);
+        else
+            inputData = JSON.parse(graph).Nodes;
     } else {
         let graph = container.dataset.result;
         inputData = JSON.parse(JSON.parse(graph));

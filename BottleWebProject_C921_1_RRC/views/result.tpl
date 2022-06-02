@@ -10,5 +10,5 @@
 <input class="btn-norma" type="button" id="export_button" onclick="return importNetwork(true)" value="Показать результат!"/>
 
 <body onload="importNetwork(true);">
-    <div id="mynetwork" data-result="{{result}}" data-input="{{input}}"></div>
+    <div id="mynetwork" data-result="{{result}}" data-input="{{input}}" data-alg-type="{{algType}}"></div>
 </body>

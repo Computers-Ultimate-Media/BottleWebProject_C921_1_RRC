@@ -1,5 +1,6 @@
-from bottle import route, view, request, HTTPResponse
 from datetime import datetime
+
+from bottle import route, view, request, HTTPResponse
 
 from BottleWebProject_C921_1_RRC.database import select_one
 
@@ -46,13 +47,14 @@ def calculate_request():
 @view('result')
 def result_page():
     db_id = request.query.id
-    a = select_one(f"select input, output from bottle_db.requests where id={db_id}")
+    a = select_one(f"select input, output, alg_type from bottle_db.requests where id={db_id}")
 
     return dict(
         title='Результат алгоритма',
         year=datetime.now().year,
         result=a[1],
-        input=a[0]
+        input=a[0],
+        algType=a[2]
     )
 
 
