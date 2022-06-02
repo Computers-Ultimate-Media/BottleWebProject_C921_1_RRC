@@ -88,7 +88,7 @@ function editEdgeWithoutDrag(data, callback) {
     let l = document.getElementById("mynetwork");
     let algType = l.dataset.algType
     if (algType != 3) {
-        saveNodeData.call(this, data, callback)
+        saveEdgeData.call(this, data, callback)
     }
 }
 
