@@ -37,13 +37,14 @@ def create_database():
 
     # скрипт создания таблицы с результатами
     tables = {
-        "CREATE TABLE `bottle_db`.`requests` ("
-        "`id` INT NOT NULL AUTO_INCREMENT,  "
-        "`timestamp` DATETIME NOT NULL DEFAULT NOW(),"
-        "`alg_type` INT NOT NULL,"
-        "`input` TEXT NOT NULL,"
-        "`output` TEXT NOT NULL,"
-        "PRIMARY KEY (`id`));"
+
+        "CREATE TABLE `bottle_db`.`alg_type` ( `id` INT NOT NULL AUTO_INCREMENT, `alg_name_ru` VARCHAR(45) NULL, "
+        "PRIMARY KEY (`id`)); ",
+        "INSERT INTO `bottle_db`.`alg_type` (`id`, `alg_name_ru`) VALUES ('1', 'Алгоритм BFS');",
+        "INSERT INTO `bottle_db`.`alg_type` (`id`, `alg_name_ru`) VALUES ('2', 'Алгоритм DFS');",
+        "INSERT INTO `bottle_db`.`alg_type` (`id`, `alg_name_ru`) VALUES ('3', 'Алгоритм Краскала');",
+        "CREATE TABLE `requests` ( `id` int NOT NULL AUTO_INCREMENT, `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, `alg_type` int NOT NULL, `input` text NOT NULL, `output` text NOT NULL, PRIMARY KEY (`id`), KEY `alt` (`alg_type`), CONSTRAINT `alt` FOREIGN KEY (`alg_type`) REFERENCES `alg_type` (`id`))"
+
     }
 
     for table in tables:
