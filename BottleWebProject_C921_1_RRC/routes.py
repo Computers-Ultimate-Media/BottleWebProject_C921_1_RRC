@@ -18,7 +18,7 @@ def home():
 @view('contact')
 def contact():
     return dict(
-        title='Команда #1',
+        title='Команда разработчиков',
         year=datetime.now().year
     )
 
@@ -49,7 +49,7 @@ def result_page():
     a = select_one(f"select output from bottle_db.requests where id={db_id}")
 
     return dict(
-        title='result page',
+        title='Результат алгоритма',
         year=datetime.now().year,
         graph=a[0]
     )
@@ -59,7 +59,7 @@ def result_page():
 @view('algorithms/bfs')
 def bfs_page():
     return dict(
-        title='bfs',
+        title='Алгоритм BFS',
         year=datetime.now().year
     )
 
@@ -68,7 +68,7 @@ def bfs_page():
 @view('algorithms/dfs')
 def dfs_page():
     return dict(
-        title='dfs',
+        title='Алгоритм DFS',
         year=datetime.now().year
     )
 
@@ -77,6 +77,6 @@ def dfs_page():
 @view('algorithms/kruskal')
 def kruskal_page():
     return dict(
-        title='kruskal',
+        title='Алгоритм Кruskal',
         year=datetime.now().year
     )

@@ -51,5 +51,36 @@ input[type="checkbox"].input-validation-error {
 
 .index-elem {
     width: auto;
-    min-height: 250px;
+    min-height: 225px;
 }
+
+.hover-info {
+    margin: 0 0 0 10px;
+    border: 1px solid #5e5e5e;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    vertical-align: center;
+    color: #31b0d5;
+    line-height: 20px;
+}
+
+.text-dec {
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    text-align: justify;
+    margin: 20px 0 20px 0;
+}
+
+.t-l {
+    font-size: 26px;
+}
+
+.t-n {
+    font-size: 22px;
+}
+
+.t-s {
+    font-size: 18px;
+}
+
