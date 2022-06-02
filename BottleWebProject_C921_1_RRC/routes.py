@@ -47,14 +47,16 @@ def calculate_request():
 @view('result')
 def result_page():
     db_id = request.query.id
-    a = select_one(f"select input, output, alg_type from bottle_db.requests where id={db_id}")
+    sql = select_one(
+        f"select input, output, alg_type, alg_name_ru from bottle_db.requests r inner join bottle_db.alg_type a on a.id = r.alg_type  where r.id={db_id}")
 
     return dict(
         title='Результат алгоритма',
         year=datetime.now().year,
-        result=a[1],
-        input=a[0],
-        algType=a[2]
+        input=sql[0],
+        result=sql[1],
+        algType=sql[2],
+        algName=sql[3]
     )
 
 
@@ -80,6 +82,6 @@ def dfs_page():
 @view('algorithms/kruskal')
 def kruskal_page():
     return dict(
-        title='Алгоритм Кruskal',
+        title='Алгоритм Краскала',
         year=datetime.now().year
     )
