@@ -17,11 +17,11 @@
     <span id="edge-operation">edge</span> <br/>
     <table style="margin: auto">
         <tr>
-            <td>label</td>
-            <td><input id="edge-label" value="new value"/></td>
+            <td class="text-dec">Вес</td>
+            <td><input type="number" min="1" oninput="validity.valid||(value='');" id="edge-label" value="1"/></td>
         </tr>
     </table>
-    <input type="button" value="Сохранит" id="edge-saveButton"/>
+    <input type="button" value="Сохранить" id="edge-saveButton"/>
     <input type="button" value="Отменить" id="edge-cancelButton"/>
 </div>
 <br/>

@@ -15,21 +15,12 @@ function draw() {
         manipulation: {
             addNode: function (data, callback) {
                 // filling in the popup DOM elements
-                document.getElementById("node-operation").innerText = "Добавьте узел";
-                editNode(data, clearNodePopUp, callback);
-            },
-            editNode: function (data, callback) {
-                // filling in the popup DOM elements
-                document.getElementById("node-operation").innerText = "Изменить узел";
-                editNode(data, cancelNodeEdit, callback);
+                editNode(data, callback);
             },
             addEdge: function (data, callback) {
                 if (data.from === data.to) {
-                    let r = confirm("Вы действительно хотите соединить узел с самим собой?");
-                    if (r !== true) {
-                        callback(null);
-                        return;
-                    }
+                    callback(null);
+                    return;
                 }
                 document.getElementById("edge-operation").innerText = "Добавить связь";
                 editEdgeWithoutDrag(data, callback);
@@ -46,29 +37,10 @@ function draw() {
 }
 
 
-function editNode(data, cancelAction, callback) {
-    document.getElementById("node-id").value = counter_nodes;
-    document.getElementById("node-saveButton").onclick = saveNodeData.bind(
-        this,
-        data,
-        callback
-    );
-    document.getElementById("node-cancelButton").onclick =
-        cancelAction.bind(this, callback);
-    document.getElementById("node-popUp").style.display = "block";
+function editNode(data, callback) {
+    saveNodeData.call(this, data, callback);
 }
 
-// Callback passed as parameter is ignored
-function clearNodePopUp() {
-    document.getElementById("node-saveButton").onclick = null;
-    document.getElementById("node-cancelButton").onclick = null;
-    document.getElementById("node-popUp").style.display = "none";
-}
-
-function cancelNodeEdit(callback) {
-    clearNodePopUp();
-    callback(null);
-}
 
 function removeOptions() {
     const select = document.getElementById("first_node");
@@ -92,13 +64,12 @@ function addNewNodeInList() {
 }
 
 function saveNodeData(data, callback) {
-    nodes.push(counter_nodes);
+    nodes.push(counter_nodes + 1);
     counter_nodes += 1;
     addNewNodeInList();
 
-    data.label = document.getElementById("node-id").value;
-    data.id = document.getElementById("node-id").value;
-    clearNodePopUp();
+    data.label = counter_nodes.toString();
+    data.id = counter_nodes - 1;
     callback(data);
 }
 
@@ -113,6 +84,12 @@ function editEdgeWithoutDrag(data, callback) {
     document.getElementById("edge-cancelButton").onclick =
         cancelEdgeEdit.bind(this, callback);
     document.getElementById("edge-popUp").style.display = "block";
+
+    let l = document.getElementById("mynetwork");
+    let algType = l.dataset.algType
+    if (algType != 3) {
+        saveNodeData.call(this, data, callback)
+    }
 }
 
 function clearEdgePopUp() {
@@ -160,7 +137,7 @@ function exportNetwork() {
 
     if (algType == 1 || algType == 2) {
         let e = document.getElementById("first_node");
-        let select_node = e.options[e.selectedIndex].value;
+        let select_node = e.options[e.selectedIndex].value - 1;
 
         calculate_request = {
             "AlgType": algType,
@@ -243,7 +220,7 @@ function getNodeData(data) {
     data.forEach(function (elem, index, array) {
         let nod = {
             id: elem.id,
-            label: elem.id
+            label: (parseInt(elem.id) + 1).toString()
         }
 
         if ("color" in elem) {
