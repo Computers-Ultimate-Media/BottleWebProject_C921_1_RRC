@@ -5,6 +5,8 @@ let data = null;
 let seed = 2;
 let counter_nodes = 0;
 
+// функция инициализации поля для отрисовка графа
+// с настройками для возможности действия пользователей
 function draw() {
     nodes = [];
     edges = [];
@@ -36,12 +38,12 @@ function draw() {
     network = new vis.Network(container, data, options);
 }
 
-
+// функция сохранения вершины при нажатии мышкой на поле графа
 function editNode(data, callback) {
     saveNodeData.call(this, data, callback);
 }
 
-
+// функция очистки списка вершин для старта
 function removeOptions() {
     const select = document.getElementById("first_node");
     let opt_len = select.options.length - 1;
@@ -50,6 +52,7 @@ function removeOptions() {
     }
 }
 
+// функция добавления вершин в список выбора вершины для старта
 function addNewNodeInList() {
     try {
         const select = document.getElementById("first_node");
@@ -63,6 +66,10 @@ function addNewNodeInList() {
     }
 }
 
+// функция сохранения вершины при нажатии мышкой на поле
+// изменяет список вершин для выбора
+// увеличивает счетчик вершин
+// присваивает соответствующий id вершине
 function saveNodeData(data, callback) {
     nodes.push(counter_nodes + 1);
     counter_nodes += 1;
@@ -73,6 +80,8 @@ function saveNodeData(data, callback) {
     callback(data);
 }
 
+// функция добавления связи между двумя вершинами
+// по умолчанию ставится вес соединения 1
 function editEdgeWithoutDrag(data, callback) {
     // filling in the popup DOM elements
     document.getElementById("edge-label").value = "1";
@@ -92,17 +101,20 @@ function editEdgeWithoutDrag(data, callback) {
     }
 }
 
+// функция, скрывающая диалоговое окно ввода веса грани
 function clearEdgePopUp() {
     document.getElementById("edge-saveButton").onclick = null;
     document.getElementById("edge-cancelButton").onclick = null;
     document.getElementById("edge-popUp").style.display = "none";
 }
 
+// функция скрытия окна при отмене добавления вершины
 function cancelEdgeEdit(callback) {
     clearEdgePopUp();
     callback(null);
 }
 
+// функция сохранения соединения при успешном закрытии диалогового окна
 function saveEdgeData(data, callback) {
     if (typeof data.to === "object") data.to = data.to.id;
     if (typeof data.from === "object") data.from = data.from.id;
@@ -111,10 +123,12 @@ function saveEdgeData(data, callback) {
     callback(data);
 }
 
+// функция добавления соединений к массиву вершин при экспорте
 function addConnections(elem, index) {
     elem.connections = network.getConnectedNodes(index);
 }
 
+// функция получения связей между вершинами
 function getEdges(edges) {
     let ed = [];
     edges.forEach(function (elem, index, array) {
@@ -127,6 +141,10 @@ function getEdges(edges) {
     return ed;
 }
 
+// функция экспорта графа
+// отправляет запрос серверу с post запросом с графом для обработки
+// при успешном ответе переходит на соответствующую страницу с результатом
+// иначе остается на этой странице
 function exportNetwork() {
     let nodes = objectToArray(network.getPositions());
     nodes.forEach(addConnections);
@@ -171,6 +189,7 @@ function exportNetwork() {
 
 }
 
+// функция конвертации служебных типов
 function objectToArray(obj) {
     return Object.keys(obj).map(function (key) {
         obj[key].id = key;
@@ -179,6 +198,9 @@ function objectToArray(obj) {
 }
 
 
+// функция переноса графа из атрибута div-data в контейнер графа
+// в зависимости от аргумента показывается либо исходный граф
+// либо результирующий
 function importNetwork(type) {
 
 
@@ -220,6 +242,8 @@ function importNetwork(type) {
     network = new vis.Network(container, data, {});
 }
 
+
+// функция получения данных по вершинам в нужном для vis.js формате
 function getNodeData(data) {
     let networkNodes = [];
 
@@ -239,6 +263,8 @@ function getNodeData(data) {
     return new vis.DataSet(networkNodes);
 }
 
+
+// функция получения данных по вершинам в нужном для эксорпа
 function getNodeById(data, id) {
     for (let n = 0; n < data.length; n++) {
         if (data[n].id == id) {
@@ -249,6 +275,8 @@ function getNodeById(data, id) {
     throw "Can not find id '" + id + "' in data";
 }
 
+
+// функция получения данных по соединениям в нужном для ипорта формата
 function getEdgeData(data) {
     let networkEdges = [];
 
@@ -276,6 +304,7 @@ function getEdgeData(data) {
     return new vis.DataSet(networkEdges);
 }
 
+// функция получения соединения для варианта с весом вершин
 function getCustomEdgeData(data) {
     let networkEdges = [];
 
@@ -289,6 +318,7 @@ function getCustomEdgeData(data) {
     return new vis.DataSet(networkEdges);
 }
 
+// функция инициализации страницы
 function init() {
     draw();
 }
