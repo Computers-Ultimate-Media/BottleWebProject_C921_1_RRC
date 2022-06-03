@@ -7,6 +7,8 @@ from BottleWebProject_C921_1_RRC.modules.algorithms.kruskal import kruskal
 from BottleWebProject_C921_1_RRC.modules.formatConverter import data_to_matrix, matrix_to_data
 
 
+# обработчик поступающих запросов на вычисление
+# возвращает id записи в БД после сохранения в ней
 def handle_request(data: dict) -> int:
     alg_type = data.get("AlgType")
     alg_type = int(alg_type)
@@ -43,6 +45,8 @@ def handle_request(data: dict) -> int:
     return request_id
 
 
+# сохранение результата обработки в БД
+# возвращает id записи в БД
 def save_to_database(alg_type: int, input: str, output: str) -> int:
     sql = "insert into bottle_db.requests (alg_type, input, output) values (%s, %s, %s);"
     val = (alg_type, input, output)
@@ -53,6 +57,8 @@ def save_to_database(alg_type: int, input: str, output: str) -> int:
     return res[0]
 
 
+# изменение стиля начальной вершины графа
+# помечает ее красным и возвращает измененный граф
 def mark_start_node(json_graph: str, start: int) -> str:
     data: list[dict] = json.loads(json_graph)
 

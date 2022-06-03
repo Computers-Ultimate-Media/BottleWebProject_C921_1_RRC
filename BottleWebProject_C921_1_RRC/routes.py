@@ -5,6 +5,7 @@ from bottle import route, view, request, HTTPResponse
 from BottleWebProject_C921_1_RRC.database import select_one
 
 
+# обработчик главной страницы сайта
 @route('/')
 @route('/home')
 @view('index')
@@ -15,6 +16,7 @@ def home():
     )
 
 
+# обработчик страницы о разработчиках
 @route('/contact')
 @view('contact')
 def contact():
@@ -24,6 +26,9 @@ def contact():
     )
 
 
+# обработчик post запроса для обработки графа
+# возвращает либо статус 200 Ok и id результата
+# либо статус 400 с ошибкой
 @route('/calculate', method='post')
 def calculate_request():
     from json import dumps as json_dumps, loads as json_loads
@@ -43,6 +48,9 @@ def calculate_request():
         return HTTPResponse(status=400)
 
 
+# обработчик get запроса для результирующей страницы
+# принимает в качестве аргумента id записи
+# возвращает данные в соответствии с id
 @route('/result')
 @view('result')
 def result_page():
@@ -60,6 +68,7 @@ def result_page():
     )
 
 
+# страница для графа BFS
 @route('/bfs')
 @view('algorithms/bfs')
 def bfs_page():
@@ -69,6 +78,7 @@ def bfs_page():
     )
 
 
+# страница для графа DFS
 @route('/dfs')
 @view('algorithms/dfs')
 def dfs_page():
@@ -78,6 +88,7 @@ def dfs_page():
     )
 
 
+# страница для графа Kruskal
 @route('/kruskal')
 @view('algorithms/kruskal')
 def kruskal_page():

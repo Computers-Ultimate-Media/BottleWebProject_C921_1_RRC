@@ -1,6 +1,7 @@
 from copy import deepcopy
 
 
+# алгоритм прохода по графу по глубине
 def dfs(matrix_in: list[list[int]], start: int) -> list[list[int]]:
     matrix_out = deepcopy(matrix_in)
     for i in range(len(matrix_out)):
