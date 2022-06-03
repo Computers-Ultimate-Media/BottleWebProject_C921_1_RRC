@@ -16,7 +16,7 @@ class TestBFS(unittest.TestCase):
         res = bfs(matrix, 0)
         self.assertIsNotNone(res)
 
-    def test_find_spanning_tree(self):
+    def test_find_spanning_tree_1(self):
         matrix = [[0, 1, 1, 1, 1, 0, 0, 0],
                   [1, 0, 1, 1, 1, 0, 0, 1],
                   [1, 1, 0, 1, 1, 1, 0, 0],
@@ -36,6 +36,59 @@ class TestBFS(unittest.TestCase):
                           [0, 0, 1, 0, 0, 0, 0, 0],
                           [0, 0, 0, 0, 1, 0, 0, 0],
                           [0, 1, 0, 0, 0, 0, 0, 0]]
+
+        for idx, x in enumerate(matrix_correct):
+            for idj, j in enumerate(x):
+                val = res[idx][idj]
+                self.assertEqual(j, val)
+
+    def test_find_spanning_tree_2(self):
+        matrix = [[0, 1, 1, 1, 1, 0, 0, 0],
+                  [1, 0, 1, 1, 1, 0, 0, 1],
+                  [1, 1, 0, 1, 1, 1, 0, 1],
+                  [1, 1, 1, 0, 1, 0, 0, 0],
+                  [1, 1, 1, 1, 0, 0, 1, 0],
+                  [0, 0, 1, 0, 1, 0, 1, 1],
+                  [0, 0, 0, 0, 1, 1, 0, 0],
+                  [0, 1, 0, 0, 0, 1, 0, 0]]
+
+        res = bfs(matrix, 0)
+
+        matrix_correct = [[0, 1, 1, 1, 1, 0, 0, 0],
+                          [1, 0, 0, 0, 0, 0, 0, 1],
+                          [1, 0, 0, 0, 0, 1, 0, 0],
+                          [1, 0, 0, 0, 0, 0, 0, 0],
+                          [1, 0, 0, 0, 0, 0, 1, 0],
+                          [0, 0, 1, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 1, 0, 0, 0],
+                          [0, 1, 0, 0, 0, 0, 0, 0]]
+
+        for idx, x in enumerate(matrix_correct):
+            for idj, j in enumerate(x):
+                val = res[idx][idj]
+                self.assertEqual(j, val)
+
+    def test_find_spanning_tree_3(self):
+        matrix = [[0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0]]
+
+        res = bfs(matrix, 0)
+
+        matrix_correct = \
+            [[0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0]]
 
         for idx, x in enumerate(matrix_correct):
             for idj, j in enumerate(x):
