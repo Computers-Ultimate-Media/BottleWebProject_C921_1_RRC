@@ -38,8 +38,9 @@ def handle_request(data: dict) -> int:
         graph_out = mark_start_node(graph_out, start)
 
     if alg_type == 3:
-        graph_in["Edges"] = connections
-        graph_out = json.dumps(graph_in)
+        graph_out = copy(graph_in)
+        graph_out["Edges"] = connections
+        graph_out = json.dumps(graph_out)
 
     request_id = save_to_database(alg_type, json.dumps(graph_in), json.dumps(graph_out))
     return request_id
